@@ -6,6 +6,7 @@
   --lvm-brand-navy: #1c2a39;
   --lvm-brand-navy-raised: #172033;
   --lvm-brand-gold: #c6a15b;
+  --lvm-gold-text-on-light: #825c18;
   --lvm-focus-ring: #b4872e;
   --lvm-space-1: 4px;
   --lvm-space-2: 8px;
@@ -44,7 +45,7 @@ img { max-width: 100%; }
 .site-header { position: relative; z-index: 30; background: #fff; border-bottom: 1px solid rgba(15, 31, 51, .08); }
 .header-inner { min-height: 78px; display: flex; align-items: center; gap: 32px; }
 .brand { display: inline-flex; align-items: center; gap: var(--lvm-space-3); white-space: nowrap; font-size: 21px; font-weight: 800; letter-spacing: -.045em; }
-.brand strong { color: var(--brand-gold); }
+.brand strong { color: var(--lvm-gold-text-on-light); }
 .brand-mark { position: relative; flex: none; display: block; width: 40px; height: 40px; border-radius: 50%; background: var(--brand-gold); }
 .brand-mark::before, .brand-mark::after { content: ''; position: absolute; background: var(--brand-navy); border-radius: 1px; }
 .brand-mark::before { width: 3px; height: 24px; left: 19px; top: 8px; }
@@ -56,7 +57,7 @@ img { max-width: 100%; }
 .header-cta:hover, .button-gold:hover { background: #b58a32; }
 .menu-toggle, .mobile-menu, .mobile-bottom-nav { display: none; }
 
-.eyebrow, .card-kicker { margin: 0 0 16px; color: var(--brand-gold); font-size: 11px; letter-spacing: .23em; font-weight: 800; }
+.eyebrow, .card-kicker { margin: 0 0 16px; color: var(--lvm-gold-text-on-light); font-size: 11px; letter-spacing: .23em; font-weight: 800; }
 .button { display: inline-flex; justify-content: center; align-items: center; gap: 14px; min-height: 52px; padding: 13px 23px; border-radius: var(--lvm-radius-control); font-size: 14px; font-weight: 800; transition: background var(--lvm-motion-fast), transform var(--lvm-motion-fast); }
 .button:hover { transform: translateY(-1px); }
 .button-gold { background: var(--brand-gold); color: var(--brand-navy); }
@@ -95,7 +96,7 @@ img { max-width: 100%; }
 .hero-scroll { position: absolute; z-index: 1; bottom: 24px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 800; letter-spacing: .22em; color: #e2c274; white-space: nowrap; }
 .home-intro { padding-block: 90px 120px; text-align: center; }
 .home-intro h2, .home-quote h2 { max-width: 760px; margin: 0 auto 20px; font-size: clamp(36px, 4vw, 56px); line-height: 1.08; letter-spacing: -.045em; }
-.home-intro h2 em { color: var(--brand-gold); }
+.home-intro h2 em { color: var(--lvm-gold-text-on-light); }
 .section-lead { max-width: 680px; margin: 0 auto 44px; line-height: 1.7; color: var(--muted); font-size: 17px; }
 .home-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; text-align: left; }
 .feature-card { min-height: 285px; padding: 28px; border-radius: 14px; background: white; border: 1px solid var(--border); box-shadow: var(--shadow); }
@@ -105,12 +106,13 @@ img { max-width: 100%; }
 .feature-card a { color: #946a24; font-weight: 800; }
 .feature-card a:hover { text-decoration: underline; }
 .home-quote { padding-block: 85px; text-align: center; background: var(--brand-navy); color: white; }
+.home-quote .eyebrow { color: var(--brand-gold); }
 .home-quote h2 { margin-bottom: 28px; }
 
 .page-banner { padding-block: 39px 69px; background: linear-gradient(115deg, var(--brand-navy), #324c67); color: white; }
 .back-link { display: inline-flex; margin-bottom: 34px; padding: 12px 16px; border-radius: 8px; background: white; color: var(--brand-navy); font-size: 13px; font-weight: 800; }
 .back-link:hover { background: #f4edda; }
-.page-banner .eyebrow { margin-bottom: 10px; }
+.page-banner .eyebrow { margin-bottom: 10px; color: var(--brand-gold); }
 .page-banner h1 { margin: 0; font-size: clamp(37px, 4vw, 60px); letter-spacing: -.04em; }
 .gold-rule { display: block; margin-top: 24px; width: 42px; height: 3px; background: var(--brand-gold); border-radius: 5px; }
 .page-content { padding-block: 32px 100px; min-height: 550px; }
@@ -186,6 +188,7 @@ img { max-width: 100%; }
 .not-found p:not(.eyebrow) { color: var(--muted); }
 
 .site-footer { background: var(--brand-navy); color: #d7dde6; padding-block: 65px 20px; }
+.site-footer .brand strong { color: var(--brand-gold); }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.3fr; gap: 50px; }
 .footer-brand { color: white; }
 .footer-grid h2 { margin: 0 0 14px; color: white; font-size: 14px; }
