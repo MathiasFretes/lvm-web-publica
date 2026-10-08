@@ -18,7 +18,7 @@ export function Header() {
       <header className={`site-header${location.pathname === '/' ? ' site-header-home' : ''}`}>
         <div className="header-inner container">
           <Link className="brand" to="/" onClick={() => setOpen(false)} aria-label="La Voz Misionera, ir al inicio">
-            <span className="brand-mark" aria-hidden="true">LVM</span>
+            <span className="brand-mark" aria-hidden="true" />
             <span>La Voz <strong>Misionera</strong></span>
           </Link>
           <nav className="desktop-nav" aria-label="Navegación principal">
@@ -73,7 +73,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div>
-          <Link className="brand footer-brand" to="/"><span className="brand-mark" aria-hidden="true">LVM</span> La Voz <strong>Misionera</strong></Link>
+          <Link className="brand footer-brand" to="/"><span className="brand-mark" aria-hidden="true" /> La Voz <strong>Misionera</strong></Link>
           <p>Un lugar para encontrar comunidad, esperanza y propósito.</p>
         </div>
         <div>
