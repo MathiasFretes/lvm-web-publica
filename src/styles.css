@@ -40,6 +40,17 @@ img { max-width: 100%; }
 .button { display: inline-flex; justify-content: center; align-items: center; gap: 14px; min-height: 52px; padding: 13px 23px; border-radius: 8px; font-size: 14px; font-weight: 800; transition: background .15s, transform .15s; }
 .button:hover { transform: translateY(-1px); }
 .button-gold { background: var(--brand-gold); color: #fff; }
+.button-outline-navy { border: 1px solid var(--brand-navy); background: #fff; color: var(--brand-navy); }
+.preview-import { padding-top: 4rem; padding-bottom: 6rem; max-width: 800px; }
+.preview-import > p { max-width: 680px; }
+.preview-file-label { display: grid; gap: 0.65rem; margin: 2rem 0; font-weight: 700; cursor: pointer; }
+.preview-file-label input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.preview-file-control { display: inline-flex; align-items: center; justify-content: center; width: fit-content; min-height: 44px; padding: 0.7rem 1rem; border: 1px solid var(--brand-navy); border-radius: 0.6rem; background: #fff; color: var(--brand-navy); }
+.preview-file-label:focus-within .preview-file-control { outline: 3px solid var(--brand-gold); outline-offset: 3px; }
+.preview-import-review { border: 1px solid var(--brand-gold); border-radius: 0.8rem; padding: 1.5rem; background: #fff; }
+.preview-import-review li { margin: 0.4rem 0; }
+.preview-import-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
+.preview-error { padding: 0.8rem; border-radius: 0.5rem; background: #fff0ef; color: #9c2626; }
 .button-outline-light { color: #fff; border: 1px solid rgba(255, 255, 255, .8); background: rgba(255, 255, 255, .05); }
 .button-outline-light:hover { background: rgba(255, 255, 255, .15); }
 .button-navy { background: var(--brand-navy); color: #fff; }
