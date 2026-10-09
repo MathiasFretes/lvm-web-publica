@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { PreviewNote } from '../components/Shell'
-import { events, sermons, venues } from '../data/preview'
+import { usePublicContent } from '../data/PublicContentContext'
 
 export function HomePage() {
-  const next = events[0]
+  const { content: { events, sermons, venues }, source } = usePublicContent()
+  const next = [...events].sort((a, b) => `${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`))[0]
   const featured = sermons[0]
   return (
     <>
@@ -28,16 +29,16 @@ export function HomePage() {
         <div className="home-feature-grid">
           <article className="feature-card">
             <span className="feature-symbol" aria-hidden="true">◷</span>
-            <p className="card-kicker">PRÓXIMO ENCUENTRO · EJEMPLO</p>
-            <h3>{next.title}</h3>
-            <p>{next.description}</p>
+            <p className="card-kicker">PRÓXIMO ENCUENTRO · {source === 'imported' ? 'PREVIEW LOCAL' : 'EJEMPLO'}</p>
+            <h3>{next?.title ?? 'Sin encuentros preparados'}</h3>
+            <p>{next?.description ?? 'Prepara un evento en LVM Service para verlo aquí.'}</p>
             <Link to="/eventos">Explorar agenda <span aria-hidden="true">→</span></Link>
           </article>
           <article className="feature-card">
             <span className="feature-symbol" aria-hidden="true">✧</span>
-            <p className="card-kicker">MENSAJE DESTACADO · EJEMPLO</p>
-            <h3>{featured.title}</h3>
-            <p>{featured.summary}</p>
+            <p className="card-kicker">MENSAJE DESTACADO · {source === 'imported' ? 'PREVIEW LOCAL' : 'EJEMPLO'}</p>
+            <h3>{featured?.title ?? 'Sin prédicas preparadas'}</h3>
+            <p>{featured?.summary ?? 'Prepara una prédica en LVM Service para verla aquí.'}</p>
             <Link to="/predicas">Ver prédicas <span aria-hidden="true">→</span></Link>
           </article>
           <article className="feature-card">

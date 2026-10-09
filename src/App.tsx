@@ -5,6 +5,7 @@ import { EventsPage } from './pages/EventsPage'
 import { SermonsPage } from './pages/SermonsPage'
 import { VenuesPage } from './pages/VenuesPage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { ImportPreviewPage } from './pages/ImportPreviewPage'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/eventos" element={<EventsPage />} />
           <Route path="/predicas" element={<SermonsPage />} />
           <Route path="/sedes" element={<VenuesPage />} />
+          <Route path="/preview/import" element={<ImportPreviewPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

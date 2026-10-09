@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { usePublicContent } from '../data/PublicContentContext'
 
 const links = [
   { to: '/', label: 'Inicio', icon: '⌂', end: true },
@@ -17,7 +18,7 @@ export function Header() {
       <header className={`site-header${location.pathname === '/' ? ' site-header-home' : ''}`}>
         <div className="header-inner container">
           <Link className="brand" to="/" onClick={() => setOpen(false)} aria-label="La Voz Misionera, ir al inicio">
-            <span className="brand-mark" aria-hidden="true">✦</span>
+            <span className="brand-mark" aria-hidden="true" />
             <span>La Voz <strong>Misionera</strong></span>
           </Link>
           <nav className="desktop-nav" aria-label="Navegación principal">
@@ -27,7 +28,7 @@ export function Header() {
               </NavLink>
             ))}
           </nav>
-          <Link className="header-cta" to="/sedes">Conocé nuestras sedes <span aria-hidden="true">↗</span></Link>
+          <Link className="header-cta" to="/preview/import">Cargar preview <span aria-hidden="true">↗</span></Link>
           <button
             className="menu-toggle"
             type="button"
@@ -47,6 +48,7 @@ export function Header() {
               {link.label}
             </NavLink>
           ))}
+          <NavLink to="/preview/import" onClick={() => setOpen(false)}>Cargar preview</NavLink>
         </nav>
       )}
     </>
@@ -71,12 +73,13 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div>
-          <Link className="brand footer-brand" to="/"><span className="brand-mark" aria-hidden="true">✦</span> La Voz <strong>Misionera</strong></Link>
+          <Link className="brand footer-brand" to="/"><span className="brand-mark" aria-hidden="true" /> La Voz <strong>Misionera</strong></Link>
           <p>Un lugar para encontrar comunidad, esperanza y propósito.</p>
         </div>
         <div>
           <h2>Explorá</h2>
           {links.map((link) => <Link key={link.to} to={link.to}>{link.label}</Link>)}
+          <Link to="/preview/import">Cargar preview local</Link>
         </div>
         <div>
           <h2>Esta preview</h2>
@@ -102,5 +105,6 @@ export function PageBanner({ eyebrow, title, accent }: { eyebrow: string; title:
 }
 
 export function PreviewNote() {
-  return <p className="preview-note" role="note">Vista de ejemplo · El contenido final será publicado desde LVM Service.</p>
+  const { source } = usePublicContent()
+  return <p className="preview-note" role="note">{source === 'imported' ? 'Vista previa local importada · Sin publicación en Internet.' : 'Vista de ejemplo · El contenido final será publicado desde LVM Service.'}</p>
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { PageBanner, PreviewNote } from '../components/Shell'
-import { events } from '../data/preview'
+import { usePublicContent } from '../data/PublicContentContext'
 
 const weekdays = ['DOM', 'LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB']
 
@@ -11,7 +11,12 @@ export function monthCells(year: number, month: number): (number | null)[] {
 }
 
 export function EventsPage() {
-  const [month, setMonth] = useState(new Date(2026, 9, 1))
+  const { content: { events } } = usePublicContent()
+  const [month, setMonth] = useState(() => {
+    const date = events[0]?.date ?? '2026-10-01'
+    const [year, month] = date.split('-').map(Number)
+    return new Date(year, month - 1, 1)
+  })
   const [selectedDay, setSelectedDay] = useState<number | null>(null)
   const year = month.getFullYear()
   const monthNumber = month.getMonth()

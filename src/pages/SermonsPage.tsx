@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { PageBanner, PreviewNote } from '../components/Shell'
-import { sermons } from '../data/preview'
-
-const series = ['Todas', ...new Set(sermons.map((sermon) => sermon.series))]
+import { usePublicContent } from '../data/PublicContentContext'
 
 export function SermonsPage() {
+  const { content: { sermons } } = usePublicContent()
+  const series = ['Todas', ...new Set(sermons.map((sermon) => sermon.series))]
   const [activeSeries, setActiveSeries] = useState('Todas')
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState<string | null>(null)
