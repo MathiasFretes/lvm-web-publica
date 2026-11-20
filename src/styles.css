@@ -85,6 +85,18 @@ img { max-width: 100%; }
 .text-button:hover { text-decoration: underline; }
 .preview-note { display: inline-block; margin: 0 0 24px; padding: 8px 12px; border-radius: 6px; background: #fbf3df; color: #6b501e; font-size: 12px; font-weight: 700; }
 
+.entry-nav { display: flex; align-items: center; gap: var(--lvm-space-4); }
+.legacy-site { min-height: 100svh; }
+.legacy-mobile-header, .legacy-mobile-menu { display: none; }
+.legacy-page { padding-top: 78px; }
+.legacy-worship-link { position: fixed; bottom: var(--lvm-space-6); right: var(--lvm-space-6); z-index: 1100; box-shadow: 0 4px 16px #0003; }
+@media(max-width:1023px) {
+  .legacy-desktop-header { display: none; }
+  .legacy-mobile-header { display: flex; align-items: center; justify-content: space-between; gap: var(--lvm-space-2); padding: var(--lvm-space-4); background: white; }
+  .legacy-mobile-menu { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--lvm-space-2); padding: var(--lvm-space-4); background: white; }
+  .legacy-mobile-menu a { padding: var(--lvm-space-3); min-height: 44px; }
+  .legacy-page { padding-top: 0; }
+}
 .home-hero { position: relative; min-height: min(780px, calc(100svh - 78px)); display: grid; align-items: center; background: var(--brand-navy) url('/images/hero-comunidad.webp') center 55% / cover no-repeat; color: white; overflow: hidden; }
 .home-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(28, 42, 57, .87), rgba(28, 42, 57, .48) 55%, rgba(28, 42, 57, .35)), linear-gradient(0deg, rgba(28, 42, 57, .75), transparent 45%); }
 .home-hero-content { position: relative; z-index: 1; max-width: 1050px; text-align: center; padding-block: 85px 105px; }
