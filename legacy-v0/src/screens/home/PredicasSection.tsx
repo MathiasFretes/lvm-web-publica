@@ -27,7 +27,7 @@ interface PredicasSectionProps {
   predicas: Predica[];
   loading: boolean;
   onNavigate: (page: PageId) => void;
-  showModal: (title: string, subtitle: string) => void;
+  showModal: (title: string, subtitle: string, url?: string | null) => void;
 }
 
 export const PredicasSection: React.FC<PredicasSectionProps> = ({
@@ -67,6 +67,7 @@ export const PredicasSection: React.FC<PredicasSectionProps> = ({
                   showModal(
                     item.title,
                     `${item.pastor} — ${item.date} — ${item.serie}`,
+                    item.videoUrl || item.audioUrl || item.url,
                   )
                 }
                 style={{

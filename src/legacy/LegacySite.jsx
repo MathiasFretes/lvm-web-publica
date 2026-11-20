@@ -24,7 +24,7 @@ export default function LegacySite() {
   const page = location.pathname === '/' ? 'inicio' : location.pathname.slice(1)
   const Screen = screens[page]
   function go(next) {
-    if(next==='admin'){ window.location.assign('/admin'); return }
+    if(next==='admin'){ window.location.assign('/service/admin'); return }
     setMenu(false)
     navigate(next==='inicio' ? '/' : `/${next}`)
     window.scrollTo(0,0)

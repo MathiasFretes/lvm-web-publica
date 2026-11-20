@@ -83,6 +83,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalSub, setModalSub] = useState('');
+  const [modalUrl, setModalUrl] = useState<string | null>(null);
 
   // ─── Helpers ──────────────────────────────────────────────
   const showToast = (msg: string) => {
@@ -90,9 +91,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     setToastVisible(true);
   };
 
-  const showModal = (title: string, sub: string) => {
+  const showModal = (title: string, sub: string, url?: string | null) => {
     setModalTitle(title);
     setModalSub(sub);
+    setModalUrl(url || null);
     setModalVisible(true);
   };
 
@@ -1347,6 +1349,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         visible={modalVisible}
         title={modalTitle}
         subtitle={modalSub}
+          url={modalUrl}
         onClose={() => setModalVisible(false)}
       />
     </ScrollView>

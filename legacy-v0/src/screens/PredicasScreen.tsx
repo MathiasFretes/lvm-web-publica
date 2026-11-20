@@ -26,6 +26,7 @@ export const PredicasScreen: React.FC<PredicasScreenProps> = ({ onBack }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalSub, setModalSub] = useState('');
+  const [modalUrl, setModalUrl] = useState<string | null>(null);
 
   const { predicas, loading: predicasLoading } = usePredicas();
 
@@ -34,9 +35,10 @@ export const PredicasScreen: React.FC<PredicasScreenProps> = ({ onBack }) => {
     setToastVisible(true);
   };
 
-  const showModal = (title: string, sub: string) => {
+  const showModal = (title: string, sub: string, url?: string | null) => {
     setModalTitle(title);
     setModalSub(sub);
+    setModalUrl(url || null);
     setModalVisible(true);
   };
 
@@ -127,6 +129,7 @@ export const PredicasScreen: React.FC<PredicasScreenProps> = ({ onBack }) => {
                 showModal(
                   item.title,
                   `${item.pastor} — ${item.date} — ${item.serie}`,
+                    item.videoUrl || item.audioUrl || item.url,
                 )
               }
               style={{
@@ -232,6 +235,7 @@ export const PredicasScreen: React.FC<PredicasScreenProps> = ({ onBack }) => {
         visible={modalVisible}
         title={modalTitle}
         subtitle={modalSub}
+          url={modalUrl}
         onClose={() => setModalVisible(false)}
       />
     </ScrollView>

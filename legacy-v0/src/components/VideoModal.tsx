@@ -3,7 +3,7 @@ import {
   TouchableOpacity,
   Text,
   View,
-  Alert,
+  Linking,
   StyleSheet,
   ViewStyle,
 } from 'react-native';
@@ -11,6 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SPACING, SHADOWS, TYPOGRAPHY } from '../constants/design';
 import { isWeb } from '../constants/platform';
 import BtnPrimary from './BtnPrimary';
+import { safeWebUrl } from '../utils/safeWebUrl';
 
 const baseOverlayStyle: ViewStyle = {
   position: isWeb ? ('fixed' as any) : 'absolute',
@@ -29,6 +30,7 @@ interface VideoModalProps {
   title: string;
   subtitle: string;
   onClose: () => void;
+  url?: string | null;
 }
 
 const VideoModal: React.FC<VideoModalProps> = ({
@@ -36,8 +38,10 @@ const VideoModal: React.FC<VideoModalProps> = ({
   title,
   subtitle,
   onClose,
+  url,
 }) => {
   if (!visible) return null;
+  const mediaUrl = safeWebUrl(url);
 
   return (
     <TouchableOpacity
@@ -118,13 +122,13 @@ const VideoModal: React.FC<VideoModalProps> = ({
             <Text style={{ color: COLORS.white, fontSize: 14 }}>▶</Text>
           </View>
           <Text style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>
-            Video disponible en YouTube
+            {mediaUrl ? 'Contenido disponible en el enlace publicado' : 'Todavía no hay un enlace publicado para esta prédica'}
           </Text>
           <BtnPrimary
-            label="Ver en YouTube"
+            label={mediaUrl ? 'Abrir prédica' : 'Cerrar'}
             small
             onPress={() => {
-              Alert.alert('YouTube', 'Abriendo YouTube...');
+              if (mediaUrl) void Linking.openURL(mediaUrl);
               onClose();
             }}
           />

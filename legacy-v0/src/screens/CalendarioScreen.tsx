@@ -17,8 +17,8 @@ interface CalendarioScreenProps {
 
 export const CalendarioScreen: React.FC<CalendarioScreenProps> = ({ onBack }) => {
   const { eventos, loading: eventosLoading } = useEventos();
-  const [month, setMonth] = useState(2);
-  const [year, setYear] = useState(2026);
+  const [month, setMonth] = useState(() => new Date().getMonth());
+  const [year, setYear] = useState(() => new Date().getFullYear());
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const months = [
@@ -164,12 +164,14 @@ export const CalendarioScreen: React.FC<CalendarioScreenProps> = ({ onBack }) =>
                 day === today.getDate() &&
                 month === today.getMonth() &&
                 year === today.getFullYear();
-              const hasEvent = [15, 22, 29, 30].includes(day);
+              const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+              const dayEvents = eventos.filter(event => event.date === dateKey);
+              const hasEvent = dayEvents.length > 0;
 
               return (
                 <TouchableOpacity
                   key={day}
-                  onPress={() => showToast(`${months[month]} ${day}, ${year}`)}
+                  onPress={() => showToast(dayEvents.length ? dayEvents.map(event => event.name).join(' · ') : `${months[month]} ${day}, ${year}`)}
                   style={{
                     width: `${100 / 7}%`,
                     padding: 8,

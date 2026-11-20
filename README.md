@@ -32,10 +32,10 @@ npm run test:e2e
 
 El código de fixtures está aislado en `src/data/preview.ts`. Al importar un PublicContent 0.1, Inicio, Eventos, Prédicas y Sedes leen el documento local importado en lugar de esos fixtures. Se puede restaurar el estado de ejemplo desde `/preview/import`; no se publica nada en Internet. El contrato está documentado en `docs/m79c-public-preview.md`.
 
-`npm run build:preview` habilita las pantallas y herramientas de demostración para el gate M7.9. El build normal (`npm run build`) muestra una página de preparación y no publica fixtures, etiquetas M7.9 ni el botón «Cargar preview». Cuando LVM Service provea contenido publicado, la Web Pública sustituirá esa página por las rutas reales sin depender de datos de ejemplo.
+`npm run build:preview` habilita las pantallas y herramientas de demostración para el gate M7.9. El build normal (`npm run build`) publica las 18 pantallas V0 mediante `src/legacy/LegacySite.jsx`; no publica los fixtures ni el cargador M7.9. Sus colecciones dinámicas leen solo documentos publicados, sin cookies de administrador.
 
 Los tests de navegador usan `npm run build:preview` y comprueban navegación, interacciones y ausencia de overflow a 390, 768, 1024 y 1440 px. Las capturas de referencia están en `docs/screenshots/`.
 
-La referencia de producto es V0, documentada en `LVM Service/docs/v0/public-screens.md`. No se importaron Expo, NativeBase, Firebase/Firestore ni componentes V0. El contenido definitivo tendrá como fuente de verdad LVM Service/Contenido y Operación cuando existan API, permisos y flujo de publicación. Esta preview no tiene CMS, Auth ni backend.
+La referencia de producto es V0, documentada en `LVM Service/docs/v0/public-screens.md`. La preview M7.9 es una implementación propia; el sitio de producción reutiliza una copia de los componentes V0 con React Native Web y adaptadores de PostgreSQL, sin runtime Firebase. LVM Service administra seis colecciones desde `/service/content`, separando borradores y publicaciones. El calendario muestra fechas reales del contenido publicado y las prédicas abren sus enlaces publicados. El resto del CMS y las acciones heredadas aún requieren revisión.
 
 Consulta `docs/m79a-v0-decisions.md` para la decisión de migración de cada página y los límites de los fixtures.

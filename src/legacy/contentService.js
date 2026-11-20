@@ -1,7 +1,7 @@
 let cached, expires=0, request
 async function content() {
   if(cached && expires>Date.now()) return cached
-  if(!request) request=fetch('/api/data/site_documents?select=collection,id,data').then(async response=>{
+  if(!request) request=fetch('/api/data/site_documents?select=collection,id,data&published=eq.true', {credentials:'omit',cache:'no-store'}).then(async response=>{
     if(!response.ok) throw new Error('No se pudo cargar el contenido')
     const rows=await response.json()
     cached=rows
