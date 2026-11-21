@@ -198,15 +198,28 @@ export const useRedes = () => {
 // ── Contenido Home ───────────────────────────
 export const useContenidoHome = () => {
   const [contenido, setContenido] = useState<ContenidoHome | null>(null);
+  const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const unsub = contenidoService.subscribeHome(data => {
+    const unsub = contenidoService.subscribeHome((data, failure) => {
+      setError(failure || null);
       setContenido(data);
       setLoading(false);
     });
     return unsub;
   }, []);
-  return { contenido, loading };
+  return { contenido, loading, error };
+};
+
+export const useContenidoGeneral = () => {
+  const [contenido, setContenido] = useState<Record<string, string> | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const unsubscribe = contenidoService.subscribeGeneral((data, failure) => { setError(failure || null); setContenido(data); setLoading(false); });
+    return unsubscribe;
+  }, []);
+  return { contenido, loading, error };
 };
 
 // ── Contenido Nosotros ───────────────────────

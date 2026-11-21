@@ -17,6 +17,8 @@ interface BtnChurchProps {
 
 const BtnChurch: React.FC<BtnChurchProps> = ({ label, onPress, small = false, full = false, style }) => (
   <TouchableOpacity
+    accessibilityRole="button"
+    accessibilityLabel={label}
     onPress={onPress}
     activeOpacity={0.85}
     style={[

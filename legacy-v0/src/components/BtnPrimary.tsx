@@ -23,6 +23,8 @@ const BtnPrimary: React.FC<BtnPrimaryProps> = ({
   style,
 }) => (
   <TouchableOpacity
+    accessibilityRole="button"
+    accessibilityLabel={label}
     onPress={onPress}
     activeOpacity={0.85}
     style={[

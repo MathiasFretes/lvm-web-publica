@@ -161,7 +161,7 @@ export const PredicasSection: React.FC<PredicasSectionProps> = ({
         )}
       </View>
 
-      <View style={{ flexDirection: 'row', gap: 12, marginTop: 22 }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginTop: 22 }}>
         <BtnPrimary
           label="VER TODAS LAS PRÉDICAS"
           onPress={() => onNavigate('predicas')}

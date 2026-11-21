@@ -234,6 +234,9 @@ export interface ContenidoGeneral {
 }
 
 export interface ContenidoHome {
+  heroTitle?: string;
+  heroAccent?: string;
+  heroSubtitle?: string;
   liveTitle: string;
   liveSubtitle: string;
   liveDefaultMessage: string;
@@ -260,6 +263,14 @@ export interface ContenidoHome {
 }
 
 export interface ContenidoNosotros {
+  visionTitle?: string;
+  visionText?: string;
+  missionTitle?: string;
+  missionText?: string;
+  statFoundation?: string;
+  statMembers?: string;
+  statVenues?: string;
+  statGroups?: string;
   heroTitle: string;
   heroSubtitle: string;
   heroDescription: string;

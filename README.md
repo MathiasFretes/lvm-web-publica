@@ -2,6 +2,8 @@
 
 La publicación actual en el VPS reutiliza las 18 pantallas públicas de `C:/la-voz-misionera-v0`, copiadas en [`legacy-v0/`](legacy-v0/README.md). Conserva el diseño y contenido editorial existente, con navegación por URL y acceso a Worship en `/app`. Las colecciones dinámicas usan la API PostgreSQL de la suite; no Firebase. Contacto, oración, visitas y boletín se guardan en un inbox privado que se administra desde **LVM Service** (`/service/admin`). OAuth, email transaccional y pagos aún no están configurados. El modo preview descrito a continuación permanece como herramienta local de revisión, separado de la publicación.
 
+Inicio, Nosotros, devocional y transmisión están conectados al editor de Service (`/service/content`). Las páginas leen únicamente publicaciones; la portada refleja la misión y el devocional vigentes. Si no existe devocional o transmisión publicada, se muestra el estado vacío correspondiente. El devocional permite imprimir/guardar desde el diálogo del navegador y compartir; la transmisión abre el enlace publicado y desaparece como activa al desactivarla. Los fallos iniciales de carga tienen un estado de error y reintento en devocional y transmisión.
+
 Sitio público de La Voz Misionera. La preview M7.9A reconstruye la jerarquía de Inicio, Eventos, Prédicas y Sedes de V0 con implementación propia en React, TypeScript y Vite. Usa tokens LVM y datos de demostración. Ningún horario, dirección, mensaje o enlace externo del fixture debe interpretarse como contenido publicado.
 
 ## Navegación

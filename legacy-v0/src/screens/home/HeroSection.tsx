@@ -4,7 +4,7 @@
  * Hero slider with slides, CTAs, and animations
  */
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { View, Text, TouchableOpacity, Animated, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, TYPOGRAPHY, SPACING, SHADOWS } from '../../constants/design';
@@ -17,9 +17,11 @@ import { HERO_SLIDES } from '../../data/fallback';
 
 interface HeroSectionProps {
   onNavigate: (page: PageId) => void;
+  content?: { heroTitle?: string; heroAccent?: string; heroSubtitle?: string } | null;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, content }) => {
+  const slides = useMemo(() => content?.heroTitle ? [{ ...HERO_SLIDES[0], title: content.heroTitle, accent: content.heroAccent || '', sub: content.heroSubtitle || '' }] : HERO_SLIDES, [content?.heroTitle, content?.heroAccent, content?.heroSubtitle]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideAnim = useRef(new Animated.Value(1)).current;
   const kenBurnsScale = useRef(new Animated.Value(1)).current;
@@ -35,8 +37,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   }, []);
 
   useEffect(() => {
+    if (slides.length < 2) return;
     startKenBurns();
-  }, [currentSlide]);
+  }, [currentSlide, startKenBurns, slides.length]);
 
   const goToSlide = useCallback((index: number) => {
     Animated.timing(slideAnim, {
@@ -54,15 +57,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   }, []);
 
   const nextSlide = useCallback(() => {
-    goToSlide((currentSlide + 1) % HERO_SLIDES.length);
-  }, [currentSlide]);
+    goToSlide((currentSlide + 1) % slides.length);
+  }, [currentSlide, slides.length, goToSlide]);
 
   useEffect(() => {
+    if (slides.length < 2) return;
     timerRef.current = setInterval(nextSlide, 7000);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [currentSlide]);
+  }, [nextSlide, slides.length]);
 
   const heroHeight = isWeb ? '100vh' : '100%';
 
@@ -72,7 +76,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         { height: heroHeight as any, minHeight: 640, position: 'relative' },
       ] as any[]}
     >
-      {HERO_SLIDES.map((slide, index) => (
+      {slides.map((slide, index) => (
         <Animated.View
           key={slide.id}
           style={[
@@ -274,7 +278,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
       </TouchableOpacity>
 
       {/* Slider arrows */}
-      {isDesktop && (
+      {isDesktop && slides.length > 1 && (
         <View
           style={{
             position: 'absolute',
@@ -289,7 +293,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           <TouchableOpacity
             onPress={() =>
               goToSlide(
-                (currentSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length,
+                (currentSlide - 1 + slides.length) % slides.length,
               )
             }
             style={{
@@ -306,7 +310,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
             <Text style={{ color: COLORS.white, fontSize: 20 }}>{'<'}</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => goToSlide((currentSlide + 1) % HERO_SLIDES.length)}
+            onPress={() => goToSlide((currentSlide + 1) % slides.length)}
             style={{
               width: 44,
               height: 44,
@@ -335,7 +339,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           gap: 8,
         }}
       >
-        {HERO_SLIDES.map((_, index) => (
+        {slides.map((_, index) => (
           <TouchableOpacity key={index} onPress={() => goToSlide(index)}>
             <View
               style={{

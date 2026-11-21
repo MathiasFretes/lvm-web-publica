@@ -38,6 +38,8 @@ export default function LegacySite() {
         <button className="button button-navy" aria-expanded={menu} aria-controls="public-menu" onClick={()=>setMenu(!menu)}>Menú</button>
       </header>
       {menu && <nav id="public-menu" className="legacy-mobile-menu" aria-label="Páginas públicas">
+        <a href="/app">Ingresar a Worship</a>
+        <a href="/service/">LVM Service</a>
         {Object.entries(names).map(([key,[,label]])=><a key={key} href={key==='inicio'?'/':`/${key}`} onClick={event=>{event.preventDefault();go(key)}}>{label}</a>)}
       </nav>}
       <main id="public-main" className={page==='inicio'?'legacy-home':'legacy-page'}>

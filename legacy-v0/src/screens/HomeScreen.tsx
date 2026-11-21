@@ -23,6 +23,7 @@ import {
   usePredicas,
   useContenidoHome,
   useContenidoNosotros,
+  useContenidoGeneral,
   useTestimoniosAprobados,
   useRedes,
   useServiceTimes,
@@ -69,6 +70,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     useContenidoHome();
   const { contenido: contenidoNosotros, loading: nosotrosLoading } =
     useContenidoNosotros();
+  const { contenido: contenidoGeneral } = useContenidoGeneral();
   const { testimonios: testimoniosAprobados, loading: testimoniosLoading } = useTestimoniosAprobados();
   const { redes, loading: redesLoading } = useRedes();
   const { serviceTimes, loading: serviceTimesLoading } = useServiceTimes();
@@ -144,7 +146,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       style={{ backgroundColor: COLORS.bg }}
     >
       {/* HERO SLIDER */}
-      <HeroSection onNavigate={onNavigate} />
+      <HeroSection key={contenidoHome?.heroTitle || 'default'} onNavigate={onNavigate} content={contenidoHome} />
 
       {/* SERVICE TIMES */}
       <FadeIn delay={100}>
@@ -166,6 +168,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               justifyContent: 'space-between',
               alignItems: 'center',
               marginBottom: 20,
+              flexWrap: 'wrap',
+              gap: 16,
             }}
           >
             <View>
@@ -181,11 +185,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 Servicios semanales
               </Text>
             </View>
-            <View style={{ flexDirection: 'row', gap: 8 }}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
               <BtnChurch
                 label="CÓMO LLEGAR"
                 small
-                onPress={() => showToast('Abriendo Google Maps...')}
+                onPress={() => onNavigate('sedes')}
               />
               <BtnPrimary
                 label="VER EN VIVO"
@@ -398,19 +402,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
           <FadeIn delay={200} style={{ flex: 1 }}>
             <SecLabel>NUESTRA MISIÓN</SecLabel>
-            <SecTitle accent="Dios">
-              Existimos para ayudar a las personas a conocer a
+            <SecTitle accent={contenidoNosotros?.missionTitle ? '' : 'Dios'}>
+              {contenidoNosotros?.missionTitle || 'Existimos para ayudar a las personas a conocer a'}
             </SecTitle>
             <VerseBlock
               verse='"Porque yo sé los planes que tengo para vosotros... planes de bienestar y no de mal."'
               reference="Jeremías 29:11"
             />
             <SecSub style={{ marginBottom: 28 }}>
-              Creemos que cada persona tiene un propósito eterno. Nuestra
-              comunidad existe para que puedas crecer en fe, encontrar tu lugar
-              y vivir la vida que Dios soñó para ti.
+              {contenidoNosotros?.missionText || 'Creemos que cada persona tiene un propósito eterno. Nuestra comunidad existe para que puedas crecer en fe, encontrar tu lugar y vivir la vida que Dios soñó para ti.'}
             </SecSub>
-            <View style={{ flexDirection: 'row', gap: 12, flexWrap: 'wrap' }}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
               <BtnPrimary
                 label="CONOCE NUESTRA HISTORIA"
                 onPress={() => onNavigate('nosotros')}
@@ -425,7 +427,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </View>
 
       {/* DEVOCIONAL PREVIEW */}
-      <View
+      {contenidoGeneral ? <View
         style={{
           backgroundColor: COLORS.bg,
           paddingHorizontal: 24,
@@ -441,9 +443,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           }}
         >
           <FadeIn delay={100} style={{ flex: 1 }}>
-            <SecLabel>DEVOCIONAL DE HOY</SecLabel>
+            <SecLabel>DEVOCIONAL PUBLICADO</SecLabel>
             <Text style={{ fontSize: 12, color: COLORS.warmGray, marginBottom: 14 }}>
-              Para reflexionar
+              {contenidoGeneral.devocionalFecha}
             </Text>
             <Text
               style={{
@@ -458,7 +460,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 marginBottom: 8,
               }}
             >
-              "Toda la Escritura es inspirada por Dios y útil para enseñanza..."
+              {contenidoGeneral.versiculoDia}
             </Text>
             <Text
               style={{
@@ -470,12 +472,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 marginBottom: 24,
               }}
             >
-              2 Timoteo 3:16-17
+              {contenidoGeneral.versiculoRef}
             </Text>
             <SecSub style={{ marginBottom: 24 }}>
-              La Palabra de Dios es el ancla de nuestra fe. Hoy te invitamos a
-              sumergirte en su verdad y dejar que ella transforme tu perspectiva
-              del día.
+              {contenidoGeneral.devocionalTexto.slice(0, 280)}
             </SecSub>
             <BtnPrimary
               label="LEER DEVOCIONAL COMPLETO"
@@ -495,8 +495,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                   marginBottom: 14,
                 }}
               >
-                Firmeza en la{' '}
-                <Text style={{ color: COLORS.church }}>Palabra</Text>
+                {contenidoGeneral.devocionalTitulo}
               </Text>
               <Text
                 style={{
@@ -506,9 +505,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                   marginBottom: 16,
                 }}
               >
-                Cuando la vida se tambalea, la Escritura nos recuerda que Dios
-                no cambia. Cada promesa en Su Palabra es un cimiento sólido
-                donde construir nuestros días.
+                {contenidoGeneral.devocionalTexto.slice(0, 280)}
               </Text>
               <View
                 style={{
@@ -529,14 +526,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                   APLICACIÓN
                 </Text>
                 <Text style={{ fontSize: 13, color: COLORS.text, lineHeight: 22 }}>
-                  Elige un versículo hoy y medita en él. Escribe cómo cambia tu
-                  perspectiva al terminar el día.
+                  {contenidoGeneral.devocionalAplicacion || 'Leé el devocional completo para profundizar en la reflexión.'}
                 </Text>
               </View>
             </Card>
           </FadeIn>
         </View>
-      </View>
+      </View> : null}
 
       {/* MINISTERIOS */}
       <View
@@ -734,7 +730,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               ))}
             </View>
 
-            <View style={{ flexDirection: 'row', gap: 12, marginTop: 22 }}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginTop: 22 }}>
               <BtnPrimary
                 label="PLANIFICAR MI VISITA"
                 onPress={() => onNavigate('nuevo')}

@@ -3,7 +3,7 @@ import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, TYPOGRAPHY, SPACING, SHADOWS } from '../constants/design';
 import { isDesktop } from '../constants/platform';
-import { useValores } from '../useFirestore';
+import { useValores, useContenidoNosotros } from '../useFirestore';
 
 interface CardProps {
   children: React.ReactNode;
@@ -187,13 +187,15 @@ interface NosotrosScreenProps {
 
 const NosotrosScreen: React.FC<NosotrosScreenProps> = ({ onBack }) => {
   const { valores, loading } = useValores();
+  const { contenido } = useContenidoNosotros();
 
   return (
     <ScrollView style={{ backgroundColor: COLORS.bg }}>
       <DarkHeader
         label="QUIÉNES SOMOS"
-        title="Visión y"
-        accent="Valores"
+        title={contenido?.heroTitle || 'Visión y'}
+        accent={contenido?.heroSubtitle || 'Valores'}
+        sub={contenido?.heroDescription || undefined}
         onBack={onBack}
       />
 
@@ -226,14 +228,12 @@ const NosotrosScreen: React.FC<NosotrosScreenProps> = ({ onBack }) => {
               marginBottom: 14,
             }}
           >
-            Ser una iglesia que impacte cada barrio de Paraguay
+            {contenido?.visionTitle || 'Ser una iglesia que impacte cada barrio de Paraguay'}
           </Text>
           <Text
             style={{ fontSize: 15, color: COLORS.warmGray, lineHeight: 27 }}
           >
-            Cada creyente es un ministerio y cada hogar una iglesia. Trabajamos
-            para que cada familia de Paraguay tenga la oportunidad de conocer el
-            amor de Jesucristo.
+            {contenido?.visionText || 'Cada creyente es un ministerio y cada hogar una iglesia. Trabajamos para que cada familia de Paraguay tenga la oportunidad de conocer el amor de Jesucristo.'}
           </Text>
         </View>
 
@@ -258,14 +258,12 @@ const NosotrosScreen: React.FC<NosotrosScreenProps> = ({ onBack }) => {
               marginBottom: 14,
             }}
           >
-            Existimos para ayudar a las personas a conocer a Dios
+            {contenido?.missionTitle || 'Existimos para ayudar a las personas a conocer a Dios'}
           </Text>
           <Text
             style={{ fontSize: 15, color: COLORS.warmGray, lineHeight: 27 }}
           >
-            Lo hacemos a través de prédica genuina, comunidad auténtica,
-            adoración de corazón, discipulado intencional y misión que
-            trasciende las paredes de la iglesia.
+            {contenido?.missionText || 'Lo hacemos a través de prédica genuina, comunidad auténtica, adoración de corazón, discipulado intencional y misión que trasciende las paredes de la iglesia.'}
           </Text>
         </View>
       </View>
@@ -335,10 +333,10 @@ const NosotrosScreen: React.FC<NosotrosScreenProps> = ({ onBack }) => {
             gap: 30,
           }}
         >
-          <Stat value="1979" label="Fundación" />
-          <Stat value="1.200+" label="Miembros" />
-          <Stat value="49" label="Sedes" />
-          <Stat value="12+" label="Células" />
+          {contenido?.statFoundation ? <Stat value={contenido.statFoundation} label="Fundación" /> : null}
+          {contenido?.statMembers ? <Stat value={contenido.statMembers} label="Miembros" /> : null}
+          {contenido?.statVenues ? <Stat value={contenido.statVenues} label="Sedes" /> : null}
+          {contenido?.statGroups ? <Stat value={contenido.statGroups} label="Células" /> : null}
         </View>
       </LinearGradient>
     </View>

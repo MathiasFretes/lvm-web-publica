@@ -259,3 +259,14 @@ img { max-width: 100%; }
   .bottom-link.active { color: #91691f; background: #fcf7e9; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+@media print {
+  .legacy-desktop-header, .legacy-mobile-header, .legacy-mobile-menu, .legacy-worship-link, .skip-link,
+  #public-devotional [role='button'], #public-devotional button { display: none !important; }
+  html, body, #root, .legacy-site, #public-main, #public-devotional {
+    height: auto !important; overflow: visible !important; background: white !important;
+  }
+  .legacy-page { padding-top: 0 !important; }
+}
+@media screen and (max-width: 1023px) {
+  .legacy-worship-link { position: static; display: table; margin: var(--lvm-space-6) auto; }
+}
