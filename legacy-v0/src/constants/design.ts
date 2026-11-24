@@ -7,6 +7,9 @@ import { isWeb } from './platform';
 
 export const COLORS = {
   deep: '#1c2a39',
+  navyTop: '#304965',
+  navyDeep: '#0d1624',
+  pearl: '#f5f3fa',
   church: '#3e6ba5',
   gold: '#c6a15b',
   goldLt: '#e2c58a',

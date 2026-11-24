@@ -30,6 +30,8 @@ const BtnPrimary: React.FC<BtnPrimaryProps> = ({
     style={[
       {
         backgroundColor: COLORS.gold,
+        minHeight: 44,
+        justifyContent: 'center',
         paddingVertical: small ? 9 : 14,
         paddingHorizontal: small ? 18 : 26,
         borderRadius: SPACING.rSm,
@@ -41,7 +43,7 @@ const BtnPrimary: React.FC<BtnPrimaryProps> = ({
   >
     <Text
       style={{
-        color: COLORS.white,
+        color: COLORS.deep,
         fontSize: small ? 13 : 14,
         fontWeight: '600',
         letterSpacing: 0.5,

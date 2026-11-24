@@ -25,7 +25,7 @@ export const DarkHeader: React.FC<DarkHeaderProps> = ({
   style,
 }) => (
   <LinearGradient
-    colors={[COLORS.deep, '#243b55']}
+    colors={[COLORS.navyTop, COLORS.deep, COLORS.navyDeep]}
     style={[
       {
         paddingTop: isDesktop ? 110 : 80,

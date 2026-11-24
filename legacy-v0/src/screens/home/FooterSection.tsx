@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { COLORS, TYPOGRAPHY, SPACING } from '../../constants/design';
 import { isDesktop } from '../../constants/platform';
 import { PageId } from '../../types/pages';
@@ -34,6 +34,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ onNavigate }) => {
         }}
       >
         <View style={{ flex: 2 }}>
+          <Image source={{ uri: '/brand/lvm-circle.svg' }} style={{ width: 64, height: 64, marginBottom: 14 }} accessibilityLabel="Emblema de La Voz Misionera" />
           <Text
             style={{
               fontFamily: TYPOGRAPHY.serif,

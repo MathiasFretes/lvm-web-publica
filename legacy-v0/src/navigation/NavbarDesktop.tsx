@@ -10,6 +10,7 @@ import { COLORS, TYPOGRAPHY, SPACING, SHADOWS } from '../constants/design';
 import { isDesktop, isWeb } from '../constants/platform';
 import { PageId } from '../types/pages';
 import { LiveDot } from '../components';
+import { BrandIdentity } from '../../../src/components/BrandIdentity';
 
 interface NavbarDesktopProps {
   activePage: PageId;
@@ -60,52 +61,7 @@ export const NavbarDesktop: React.FC<NavbarDesktopProps> = ({
         onPress={onSecretTap}
         style={{ flexDirection: 'row', alignItems: 'center', gap: 11 }}
       >
-        <View
-          style={{
-            width: 34,
-            height: 34,
-            borderRadius: 17,
-            backgroundColor: COLORS.gold,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <View
-            style={{
-              position: 'absolute',
-              width: 2,
-              height: 14,
-              backgroundColor: COLORS.white,
-              borderRadius: 1,
-            }}
-          />
-          <View
-            style={{
-              position: 'absolute',
-              width: 14,
-              height: 2,
-              backgroundColor: COLORS.white,
-              borderRadius: 1,
-            }}
-          />
-        </View>
-        <Text
-          style={{
-            fontFamily: TYPOGRAPHY.serif,
-            fontSize: 20,
-            fontWeight: '700',
-            color: textColor,
-          }}
-        >
-          La Voz{' '}
-          <Text
-            style={{
-              color: isInicio && !isScrolled ? COLORS.goldLt : COLORS.gold,
-            }}
-          >
-            Misionera
-          </Text>
-        </Text>
+        <BrandIdentity color={textColor} accent={isInicio && !isScrolled ? COLORS.goldLt : COLORS.gold} />
       </TouchableOpacity>
 
       {/* Menú central */}
@@ -568,7 +524,7 @@ export const NavbarDesktop: React.FC<NavbarDesktopProps> = ({
           }}
         >
           <Text
-            style={{ color: COLORS.white, fontSize: 13, fontWeight: '700' }}
+            style={{ color: COLORS.deep, fontSize: 13, fontWeight: '700' }}
           >
             Donar
           </Text>
