@@ -4,7 +4,10 @@
   background: #f6f7f9;
   font-synthesis: none;
   --lvm-brand-navy: #1c2a39;
-  --lvm-brand-navy-raised: #172033;
+  --lvm-brand-navy-raised: #263b52;
+  --lvm-brand-gradient: linear-gradient(160deg, #304965 0%, #1c2a39 48%, #0d1624 100%);
+  --lvm-brand-pearl: #f5f3fa;
+  /* 60% neutral content, 30% navy structure, 10% gold actions. */
   --lvm-brand-gold: #c6a15b;
   --lvm-gold-text-on-light: #825c18;
   --lvm-focus-ring: #b4872e;
@@ -42,17 +45,14 @@ img { max-width: 100%; }
 .skip-link { position: absolute; z-index: 100; top: -60px; left: 16px; padding: 12px 18px; background: white; color: var(--brand-navy); }
 .skip-link:focus { top: 12px; }
 
-.site-header { position: relative; z-index: 30; background: #fff; border-bottom: 1px solid rgba(15, 31, 51, .08); }
+.site-header { position: relative; z-index: 30; background: var(--lvm-brand-gradient); color: var(--lvm-brand-pearl); border-bottom: 1px solid rgba(15, 31, 51, .08); }
 .header-inner { min-height: 78px; display: flex; align-items: center; gap: 32px; }
 .brand { display: inline-flex; align-items: center; gap: var(--lvm-space-3); white-space: nowrap; font-size: 21px; font-weight: 800; letter-spacing: -.045em; }
 .brand strong { color: var(--lvm-gold-text-on-light); }
-.brand-mark { position: relative; flex: none; display: block; width: 40px; height: 40px; border-radius: 50%; background: var(--brand-gold); }
-.brand-mark::before, .brand-mark::after { content: ''; position: absolute; background: var(--brand-navy); border-radius: 1px; }
-.brand-mark::before { width: 3px; height: 24px; left: 19px; top: 8px; }
-.brand-mark::after { width: 17px; height: 3px; left: 12px; top: 15px; }
+.brand-mark { flex: none; display: block; width: 40px; height: 40px; border-radius: 50%; background: url('/brand/lvm-circle.svg') center / contain no-repeat; }
 .desktop-nav { display: flex; justify-content: center; flex: 1; gap: 8px; }
-.nav-link { padding: 11px 15px; border-radius: 8px; font-size: 14px; font-weight: 700; color: #364153; }
-.nav-link:hover, .nav-link.active { background: #f0f2f5; color: var(--brand-navy); }
+.nav-link { padding: 11px 15px; border-radius: 8px; font-size: 14px; font-weight: 700; color: var(--lvm-brand-pearl); }
+.nav-link:hover, .nav-link.active { background: #ffffff16; color: #fff; }
 .header-cta { padding: 12px 17px; border-radius: 8px; background: var(--brand-gold); font-size: 13px; font-weight: 800; color: var(--brand-navy); box-shadow: 0 5px 12px rgba(160, 111, 22, .2); }
 .header-cta:hover, .button-gold:hover { background: #b58a32; }
 .menu-toggle, .mobile-menu, .mobile-bottom-nav { display: none; }
@@ -270,3 +270,8 @@ img { max-width: 100%; }
 @media screen and (max-width: 1023px) {
   .legacy-worship-link { position: static; display: table; margin: var(--lvm-space-6) auto; }
 }
+
+.site-header .brand strong { color: var(--brand-gold-light); }
+
+.legacy-mobile-header { background: var(--lvm-brand-gradient); color: var(--lvm-brand-pearl); }
+.legacy-mobile-header .brand strong { color: var(--brand-gold-light); }

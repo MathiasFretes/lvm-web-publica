@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { COLORS, TYPOGRAPHY, SPACING, SHADOWS } from '../constants/design';
 import { isDesktop, isWeb } from '../constants/platform';
 import { PageId } from '../types/pages';
@@ -60,35 +60,11 @@ export const NavbarDesktop: React.FC<NavbarDesktopProps> = ({
         onPress={onSecretTap}
         style={{ flexDirection: 'row', alignItems: 'center', gap: 11 }}
       >
-        <View
-          style={{
-            width: 34,
-            height: 34,
-            borderRadius: 17,
-            backgroundColor: COLORS.gold,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <View
-            style={{
-              position: 'absolute',
-              width: 2,
-              height: 14,
-              backgroundColor: COLORS.white,
-              borderRadius: 1,
-            }}
-          />
-          <View
-            style={{
-              position: 'absolute',
-              width: 14,
-              height: 2,
-              backgroundColor: COLORS.white,
-              borderRadius: 1,
-            }}
-          />
-        </View>
+        <Image
+          source={{ uri: '/brand/lvm-circle.svg' }}
+          style={{ width: 40, height: 40 }}
+          accessibilityLabel="Emblema de La Voz Misionera"
+        />
         <Text
           style={{
             fontFamily: TYPOGRAPHY.serif,
