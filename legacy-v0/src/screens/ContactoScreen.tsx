@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
 import { COLORS, TYPOGRAPHY, SPACING, SHADOWS } from '../constants/design';
+import { useContacto } from '../useFirestore';
 import { submitPublicForm } from '../utils/publicForms';
 
 interface ContactoScreenProps {
@@ -8,6 +9,8 @@ interface ContactoScreenProps {
 }
 
 export default function ContactoScreen({ onBack }: ContactoScreenProps) {
+  const { contacto, loading: contactoLoading } = useContacto();
+  const publishedContacts = contacto.filter(item => typeof item.value === 'string' && item.value.trim());
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [mensaje, setMensaje] = useState('');
@@ -97,9 +100,18 @@ export default function ContactoScreen({ onBack }: ContactoScreenProps) {
 
         <View style={styles.info}>
           <Text style={styles.infoTitle}>Otras formas de contacto</Text>
-          <Text style={styles.infoText}>📧 admin@lavozmisionera.org</Text>
-          <Text style={styles.infoText}>📞 +595 981 123 456</Text>
-          <Text style={styles.infoText}>📍 Calle Principal, Ciudad del Este, Paraguay</Text>
+          {publishedContacts.map((item, index) => (
+            <Text key={item.id || String(index)} style={styles.infoText}>
+              {item.label ? `${item.label}: ` : ''}{item.value}
+            </Text>
+          ))}
+          {!publishedContacts.length && (
+            <Text style={styles.infoText}>
+              {contactoLoading
+                ? 'Cargando información de contacto…'
+                : 'Publicaremos aquí los canales de contacto de la iglesia. Mientras tanto, podés escribirnos con este formulario.'}
+            </Text>
+          )}
         </View>
       </View>
     </ScrollView>
