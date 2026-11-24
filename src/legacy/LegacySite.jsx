@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import NavbarDesktop from '../../legacy-v0/src/navigation/NavbarDesktop'
+import { BrandIdentity } from '../components/BrandIdentity'
 import { ThemeProvider } from '../../legacy-v0/src/ThemeContext'
 
 const loaders = import.meta.glob('../../legacy-v0/src/screens/*Screen.tsx')
@@ -34,7 +35,7 @@ export default function LegacySite() {
       <a className="skip-link" href="#public-main">Saltar al contenido</a>
       <div className="legacy-desktop-header"><NavbarDesktop activePage={page} onNavigate={go} onSecretTap={()=>go('inicio')} isScrolled={page!=='inicio'} /></div>
       <header className="legacy-mobile-header">
-        <a className="brand" href="/"><span className="brand-mark" aria-hidden="true" />La Voz <strong>Misionera</strong></a>
+        <a className="brand" href="/"><BrandIdentity /></a>
         <button className="button button-navy" aria-expanded={menu} aria-controls="public-menu" onClick={()=>setMenu(!menu)}>Menú</button>
       </header>
       {menu && <nav id="public-menu" className="legacy-mobile-menu" aria-label="Páginas públicas">

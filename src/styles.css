@@ -1,3 +1,4 @@
+@import "../docs/brand/identity.css";
 :root {
   font-family: Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #2d3748;
@@ -275,3 +276,13 @@ img { max-width: 100%; }
 
 .legacy-mobile-header { background: var(--lvm-brand-gradient); color: var(--lvm-brand-pearl); }
 .legacy-mobile-header .brand strong { color: var(--brand-gold-light); }
+
+.lvm-brand-identity { display: inline-flex; align-items: center; gap: var(--lvm-brand-lockup-gap); text-align: left; }
+.lvm-brand-identity__emblem { width: var(--lvm-brand-emblem-size); height: var(--lvm-brand-emblem-size); flex: none; }
+.lvm-brand-identity__copy { display: grid; line-height: 1.3; }
+.lvm-brand-identity__copy strong { font-size: var(--lvm-brand-name-size); font-weight: 700; }
+.lvm-brand-identity__copy small { font-size: var(--lvm-brand-product-size); font-weight: 500; }
+.brand:not(.footer-brand) { gap: var(--lvm-brand-lockup-gap); font-size: var(--lvm-brand-name-size); }
+.brand:not(.footer-brand) .brand-mark { width: var(--lvm-brand-emblem-size); height: var(--lvm-brand-emblem-size); }
+
+.legacy-desktop-header [role="button"] { min-height: 44px; justify-content: center; }

@@ -5,11 +5,12 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { COLORS, TYPOGRAPHY, SPACING, SHADOWS } from '../constants/design';
 import { isDesktop, isWeb } from '../constants/platform';
 import { PageId } from '../types/pages';
 import { LiveDot } from '../components';
+import { BrandIdentity } from '../../../src/components/BrandIdentity';
 
 interface NavbarDesktopProps {
   activePage: PageId;
@@ -60,28 +61,7 @@ export const NavbarDesktop: React.FC<NavbarDesktopProps> = ({
         onPress={onSecretTap}
         style={{ flexDirection: 'row', alignItems: 'center', gap: 11 }}
       >
-        <Image
-          source={{ uri: '/brand/lvm-circle.svg' }}
-          style={{ width: 40, height: 40 }}
-          accessibilityLabel="Emblema de La Voz Misionera"
-        />
-        <Text
-          style={{
-            fontFamily: TYPOGRAPHY.serif,
-            fontSize: 20,
-            fontWeight: '700',
-            color: textColor,
-          }}
-        >
-          La Voz{' '}
-          <Text
-            style={{
-              color: isInicio && !isScrolled ? COLORS.goldLt : COLORS.gold,
-            }}
-          >
-            Misionera
-          </Text>
-        </Text>
+        <BrandIdentity color={textColor} accent={isInicio && !isScrolled ? COLORS.goldLt : COLORS.gold} />
       </TouchableOpacity>
 
       {/* Menú central */}
@@ -544,7 +524,7 @@ export const NavbarDesktop: React.FC<NavbarDesktopProps> = ({
           }}
         >
           <Text
-            style={{ color: COLORS.white, fontSize: 13, fontWeight: '700' }}
+            style={{ color: COLORS.deep, fontSize: 13, fontWeight: '700' }}
           >
             Donar
           </Text>
